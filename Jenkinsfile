@@ -9,13 +9,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/smshubham2005/MyMavenGuavaApp.git'
+                git branch: 'main', url: 'https://github.com/Darshan429/MyMavenGuava.git'
             }
         }
 
         stage('Build') {
             steps {
                 sh 'mvn clean install'
+            }
+        }
+
+        stage('Test'){
+            steps{
+                sh'mvn clean package'
             }
         }
 
