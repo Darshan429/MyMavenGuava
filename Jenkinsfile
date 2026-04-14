@@ -7,11 +7,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Darshan429/MyMavenGuava.git'
-            }
+       stage('Checkout') {
+        steps {
+            cleanWs()   // 🔥 this wipes workspace automatically
+            git branch: 'main', url: 'https://github.com/Darshan429/MyMavenGuava.git'
         }
+    }
 
         stage('Build') {
             steps {
