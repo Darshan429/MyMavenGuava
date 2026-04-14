@@ -1,36 +1,39 @@
 pipeline {
-    agent any
+    agent any  // Use any available agent
 
     tools {
-        maven 'MAVEN'
-        jdk 'JDK'
+        maven 'MAVEN'  // Ensure this matches the name configured in Jenkins
     }
-
     stages {
-       stage('Checkout') {
-        steps {
-            cleanWs()   // 🔥 this wipes workspace automatically
-            git branch: 'main', url: 'https://github.com/Darshan429/MyMavenGuava.git'
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Darshan429/MyMavenGuava.git'
+            }
         }
-    }
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean package'  // Run Maven build
             }
         }
 
-        stage('Test'){
-            steps{
-                sh'mvn clean package'
+        stage('Test') {
+            steps {
+                sh 'mvn test'  // Run unit tests
             }
         }
 
+        
+        
+       
         stage('Run Application') {
             steps {
-                sh 'java -jar target/MyMavenGuavaApp-1.0-SNAPSHOT.jar'
+                // Start the JAR application
+                sh ' mvn exec:java -Dexec.mainClass="com.example.App"'
             }
         }
+
+        
     }
 
     post {
