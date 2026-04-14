@@ -1,54 +1,72 @@
-<properties>
-    <!-- Java version -->
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-</properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>MyMavenGuavaApp</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>MyMavenGuavaApp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.10.0</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+<dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
+    <version>33.4.0-jre</version>
+</dependency>
 
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.18.0</version>
+</dependency>
+
+  </dependencies>
+  
+  <!-- Build: Configuring plugins and build settings -->
 <build>
-    <plugins>
+<plugins>
+<!-- Example: Maven Compiler Plugin to compile Java code -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<version>3.11.0</version>
+<configuration>
+<release>17</release>
+</configuration>
+</plugin>
 
-        <!-- ✅ Compiler Plugin (fixed) -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.11.0</version>
-        </plugin>
+<!-- Example: Maven Surefire Plugin to run tests -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-surefire-plugin</artifactId>
+<version>2.22.2</version>
+</plugin>
 
-        <!-- ✅ Surefire Plugin (for tests) -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.2.5</version>
-        </plugin>
 
-        <!-- ✅ Jar Plugin (for executable jar) -->
-        <plugin>
+<plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-jar-plugin</artifactId>
-            <version>3.3.0</version>
+            <version>3.1.0</version>
             <configuration>
                 <archive>
-                    <manifest>
-                        <mainClass>com.example.App</mainClass>
-                    </manifest>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.example.App</mainClass>
+                        </manifest>
+                    </archive>
                 </archive>
             </configuration>
         </plugin>
-
-        <!-- ✅ (Optional but useful) Shade Plugin for fat jar -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.5.1</version>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-
-    </plugins>
+        
+</plugins>
 </build>
+</project>
